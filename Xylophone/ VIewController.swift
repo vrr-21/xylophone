@@ -14,8 +14,9 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
         super.viewDidLoad()
     }
 
-    @IBAction func notePressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "note1", withExtension: "wav")!
+    func playSound(buttonPressedIndex: Int32)
+    {
+        let url = Bundle.main.url(forResource: "note"+String(buttonPressedIndex), withExtension: "wav")!
         do
         {
             try audioPlayer = AVAudioPlayer(contentsOf: url)
@@ -25,6 +26,9 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
             print(error)
         }
         audioPlayer.play()
+    }
+    @IBAction func notePressed(_ sender: UIButton) {
+        playSound(buttonPressedIndex: Int32(sender.tag))
     }
 }
 
